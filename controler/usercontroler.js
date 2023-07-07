@@ -23,36 +23,25 @@ const user_register = async (req,res) => {
 }
 
 const user_login = async (req,res) => {
-    var data = await register.find({"email":req.body.email})
+    var data = await register.find({"name":req.body.name})
 
     if(data.length == 1)
     {
         if(data[0].password == req.body.password)
         {
-            res.status(200).json({
-                status:"success"
-            
-            })
+            res.redirect('/deshboard')
         }
         else
         {
-            res.status(200).json({
-                status:"Please enter correct password"
-            })
+            res.redirect('/')
         } 
     }
     else if(data.length == 0){
-        res.status(200).json({
-            status:"this id is not registed"
-    
-        })
+        res.redirect('/')
     }
     else
     {
-        res.status(200).json({
-        status:"you have multiple account"
-    
-        })
+        res.redirect('/')
     }
 }
 
